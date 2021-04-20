@@ -14,9 +14,6 @@ protocol Task: AnyObject {
     
     func add(task: Task)
     func delete(at index: Int)
-    func getName() -> String
-    func getSubtasks() -> [Task]
-    func getSubtaskCount(for index: Int) -> Int   
 }
 
 class CompositeTask: Task {
@@ -40,18 +37,6 @@ class CompositeTask: Task {
         subtasks[index].subtasks.removeAll()
         subtasks[index].parent = nil
         subtasks.remove(at: index)
-    }
-
-    func getName() -> String {
-        return name
-    }
-    
-    func getSubtaskCount(for index: Int) -> Int {
-        subtasks[index].subtasks.count
-    }
-    
-    func getSubtasks() -> [Task] {
-        return subtasks
     }
     
     init(name: String) {

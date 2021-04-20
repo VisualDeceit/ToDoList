@@ -64,14 +64,14 @@ class TableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rootTask.getSubtasks().count
+        return rootTask.subtasks.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "task", for: indexPath)
-        cell.textLabel?.text = rootTask.getSubtasks()[indexPath.row].getName()
+        cell.textLabel?.text = rootTask.subtasks[indexPath.row].name
         
-        let subtasksCount = rootTask.getSubtasks()[indexPath.row].getSubtasks().count
+        let subtasksCount = rootTask.subtasks[indexPath.row].subtasks.count
         if subtasksCount > 0 {
             cell.detailTextLabel?.text = "Subtasks: \(subtasksCount)"
         } else {
@@ -83,7 +83,7 @@ class TableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        rootTask = rootTask.getSubtasks()[indexPath.row] as? CompositeTask
+        rootTask = rootTask.subtasks[indexPath.row] as? CompositeTask
         backButtonControl()
         tableView.reloadData()
     }
